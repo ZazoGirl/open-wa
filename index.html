@@ -13,7 +13,7 @@
         פתחי WhatsApp
     </button>
 
-    <script>
+<script>
 function openWhatsApp() {
     const input = document.getElementById('phoneNumber');
     let phoneNumber = input.value.trim();
@@ -23,15 +23,18 @@ function openWhatsApp() {
         return;
     }
 
-    // מסיר רווחים, מקפים וסוגריים
-    phoneNumber = phoneNumber.replace(/[\s\-()]/g, '');
+    // מנקה רווחים, מקפים, סוגריים ותווים מיוחדים לא רצויים
+    phoneNumber = phoneNumber.replace(/[\s\-\(\)]/g, '');
 
-    // אם מתחיל ב+972 → לא נוגעת
-    if (phoneNumber.startsWith('+972')) {
+    // ממירה הכל לאותיות קטנות כדי למנוע בעיות
+    phoneNumber = phoneNumber.toLowerCase();
+
+    // אם כבר מתחיל ב+972 → משאיר כמו שהוא
+    if (/^\+972/.test(phoneNumber)) {
         // כלום
     }
     // אם מתחיל ב-972 בלי + → מוסיפה +
-    else if (phoneNumber.startsWith('972')) {
+    else if (/^972/.test(phoneNumber)) {
         phoneNumber = '+' + phoneNumber;
     }
     // אחרת – מוסיפה +972
@@ -44,6 +47,7 @@ function openWhatsApp() {
     input.value = '';
 }
 </script>
+
 
 
 </body>
