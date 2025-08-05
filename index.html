@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>פתיחת קישור WhatsApp</title>
+</head>
+<body style="direction: rtl; font-family: Arial; text-align: center; margin-top: 50px;">
+
+    <h2>פתיחת קישור WhatsApp</h2>
+    <input type="text" id="phoneNumber" placeholder="הקלידי מספר טלפון" style="padding: 10px; width: 250px;">
+    <br><br>
+    <button onclick="openWhatsApp()" style="padding: 10px 20px; cursor: pointer;">
+        פתחי WhatsApp
+    </button>
+
+    <script>
+        function openWhatsApp() {
+            const input = document.getElementById('phoneNumber');
+            const phoneNumber = input.value.trim();
+
+            if (phoneNumber === '') {
+                alert('הכניסי מספר טלפון קודם.');
+                return;
+            }
+
+            // פותח את הקישור בכרטיסייה חדשה
+            const url = `https://wa.me/+972${phoneNumber}`;
+            window.open(url, '_blank');
+
+            // מנקה את השדה
+            input.value = '';
+        }
+    </script>
+
+</body>
+</html>
