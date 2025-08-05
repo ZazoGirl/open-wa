@@ -14,23 +14,37 @@
     </button>
 
     <script>
-        function openWhatsApp() {
-            const input = document.getElementById('phoneNumber');
-            const phoneNumber = input.value.trim();
+function openWhatsApp() {
+    const input = document.getElementById('phoneNumber');
+    let phoneNumber = input.value.trim();
 
-            if (phoneNumber === '') {
-                alert('הכניסי מספר טלפון קודם.');
-                return;
-            }
+    if (phoneNumber === '') {
+        alert('הכניסי מספר טלפון קודם.');
+        return;
+    }
 
-            // פותח את הקישור בכרטיסייה חדשה
-            const url = `https://wa.me/+972${phoneNumber}`;
-            window.open(url, '_blank');
+    // מסיר רווחים, מקפים וסוגריים
+    phoneNumber = phoneNumber.replace(/[\s\-()]/g, '');
 
-            // מנקה את השדה
-            input.value = '';
-        }
-    </script>
+    // אם מתחיל ב+972 → לא נוגעת
+    if (phoneNumber.startsWith('+972')) {
+        // כלום
+    }
+    // אם מתחיל ב-972 בלי + → מוסיפה +
+    else if (phoneNumber.startsWith('972')) {
+        phoneNumber = '+' + phoneNumber;
+    }
+    // אחרת – מוסיפה +972
+    else {
+        phoneNumber = '+972' + phoneNumber;
+    }
+
+    const url = `https://wa.me/${phoneNumber}`;
+    window.open(url, '_blank');
+    input.value = '';
+}
+</script>
+
 
 </body>
 </html>
